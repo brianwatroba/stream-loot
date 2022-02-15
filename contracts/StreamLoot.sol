@@ -5,25 +5,33 @@ import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "hardhat/console.sol";
 
 contract StreamLoot is ERC1155 {
+    address public factory;
     address public owner;
     address public streamerAddr;
     uint256 public streamerId;
+    // pack these?
     uint256 public constant TOKEN = 0;
     uint256 public constant NFT1 = 1;
     uint256 public constant NFT2 = 2;
     uint256 public constant NFT3 = 3;
 
+    // need to store if a userId has been minted a specific NFT id before. Mapping of uint to uint? then need multiple lookups for a batch
+
     modifier onlyOwner() {
-        require(msg.sender == owner, "StreamLoot: Must be owner");
+        require(msg.sender == owner, "StreamLoot: NOT_OWNER");
         _;
     }
 
-    constructor(
+    constructor() ERC1155("https://streamloot.xyz/api/item/{id}.json") {
+        factory = msg.sender;
+    }
+
+    function initialize(
         address _owner,
         address _streamerAddr,
         uint256 _streamerId
-    ) ERC1155("https://streamloot.xyz/api/item/{id}.json") {
-        // mint initial amount to streamer?
+    ) public {
+        require(msg.sender == factory, "StreamLoot: FORBIDDEN");
         owner = _owner;
         streamerAddr = _streamerAddr;
         streamerId = _streamerId;
