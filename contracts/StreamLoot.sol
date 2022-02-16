@@ -22,7 +22,9 @@ contract StreamLoot is ERC1155 {
         _;
     }
 
-    constructor() ERC1155("https://streamloot.xyz/api/item/{id}.json") {
+    constructor()
+        ERC1155("https://streamloot.xyz/api/streamer/item/{id}.json")
+    {
         factory = msg.sender;
     }
 
