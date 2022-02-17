@@ -4,7 +4,6 @@ const connectDB = require("./config/db");
 const requestSubscription = require("./utils/requestSubcription");
 const getSubscriptions = require("./utils/getSubscriptions");
 const deleteAllSubscriptions = require("./utils/deleteAllSubscriptions");
-const deleteSubscription = require("./utils/deleteSubscription");
 
 const { CHANNEL_FOLLOW } = require("./constants/subTypes");
 
@@ -20,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes
 app.use("/webhooks/callback", require("./routes/webhooks/callback"));
+app.use("/api/supports", require("./routes/api/supports"));
 
 const server = app.listen(PORT, () =>
   console.log(`Server started on port ${PORT}`)
