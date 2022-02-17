@@ -12,7 +12,7 @@ contract StreamLootFactory {
     mapping(address => uint256) public streamLootToStreamerId;
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "StreamLoot: Must be owner");
+        require(msg.sender == owner, "StreamLootFactory: NOT_OWNER");
         _;
     }
 

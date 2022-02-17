@@ -33,7 +33,7 @@ contract StreamLoot is ERC1155 {
         address _streamerAddr,
         uint256 _streamerId
     ) public {
-        require(msg.sender == factory, "StreamLoot: FORBIDDEN");
+        require(msg.sender == factory, "StreamLoot: NOT_OWNER");
         owner = _owner;
         streamerAddr = _streamerAddr;
         streamerId = _streamerId;
