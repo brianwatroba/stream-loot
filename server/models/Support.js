@@ -1,23 +1,34 @@
 const mongoose = require("mongoose");
 
+const EmotesSchema = new mongoose.Schema({
+  begin: { type: Number },
+  end: { type: Number },
+  id: { type: String },
+});
+
+const MessageSchema = new mongoose.Schema({
+  text: { type: String },
+  emotes: [EmotesSchema],
+});
+
 const SupportSchema = new mongoose.Schema(
   {
-    viewerId: {
+    userId: {
       type: String,
       ref: "User",
       required: true,
     },
-    viewerUsername: {
+    userName: {
       type: String,
       ref: "User",
       required: true,
     },
-    streamerId: {
+    broadcasterUserId: {
       type: String,
       ref: "User",
       required: true,
     },
-    streamerUsername: {
+    broadcasterUserName: {
       type: String,
       ref: "User",
       required: true,
@@ -26,10 +37,16 @@ const SupportSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    value: {
+    tier: {
       type: Number,
-      required: true,
     },
+    isGift: {
+      type: Boolean,
+    },
+    message: { type: MessageSchema },
+    cumulativeMonths: { type: Number },
+    streakMonths: { type: Number },
+    durationMonths: { type: Number },
     minted: {
       type: Boolean,
       default: false,
