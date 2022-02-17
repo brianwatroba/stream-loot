@@ -4,27 +4,45 @@ const {
   TWITCH_MESSAGE_TIMESTAMP,
   TWITCH_MESSAGE_SIGNATURE,
   TWITCH_MESSAGE_TYPE,
+  MESSAGE_TYPE_VERIFICATION,
+  MESSAGE_TYPE_NOTIFICATION,
+  MESSAGE_TYPE_REVOCATION,
 } = require("../constants/headers");
 
 const verifyCallbackSrc = (req, res, next) => {
-  // if (req.headers[TWITCH_MESSAGE_TYPE] === "webhook_callback_verification") {
   const HMAC_PREFIX = "sha256=";
   const secret = process.env.EVENT_SUB_SECRET;
   const message = getHmacMessage(req);
   const hmac = HMAC_PREFIX + getHmac(secret, message);
 
   if (verifyMessage(hmac, req.headers[TWITCH_MESSAGE_SIGNATURE])) {
-    console.log("Middleware: signatures match");
-    console.log("req header", req.headers["twitch-eventsub-message-type"]);
-    console.log("body", req.body);
-    const challenge = req.body.challenge;
-    console.log("challenge", challenge);
-    next();
+    const notification = req.body;
+
+    if (MESSAGE_TYPE_NOTIFICATION === req.headers[TWITCH_MESSAGE_TYPE]) {
+      res.sendStatus(204);
+      next();
+    } else if (MESSAGE_TYPE_VERIFICATION === req.headers[TWITCH_MESSAGE_TYPE]) {
+      res.status(200).send(notification.challenge);
+    } else if (MESSAGE_TYPE_REVOCATION === req.headers[TWITCH_MESSAGE_TYPE]) {
+      res.sendStatus(204);
+      console.log(`${notification.subscription.type} notifications revoked!`);
+      console.log(`reason: ${notification.subscription.status}`);
+      console.log(
+        `condition: ${JSON.stringify(
+          notification.subscription.condition,
+          null,
+          4
+        )}`
+      );
+    } else {
+      res.sendStatus(204);
+      console.log(`Unknown message type: ${req.headers[TWITCH_MESSAGE_TYPE]}`);
+    }
   } else {
-    console.log("invalid source");
+    // Signatures didn't match.
+    console.log("403");
     res.sendStatus(403);
   }
-  // }
 };
 
 const getHmacMessage = (request) => {

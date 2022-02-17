@@ -1,8 +1,6 @@
-const ngrokUrl = require("../server");
-
 const TWITCH_SUB_URL = `https://api.twitch.tv/helix/eventsub/subscriptions`;
 
-const NGROK_URL = "https://6c4f-2603-7000-3800-81f0-00-a040.ngrok.io";
+const NGROK_URL = "https://c75a-2603-7000-3800-81f0-00-a040.ngrok.io";
 
 let SL_WEBHOOK_URL;
 process.env.NODE_ENV !== "production"
