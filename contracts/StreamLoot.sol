@@ -9,6 +9,8 @@ contract StreamLoot is ERC1155 {
     address public owner;
     address public streamerAddr;
     uint256 public streamerId;
+    // Mapping from token ID to token mint history
+    mapping(uint256 => mapping(address => bool)) public mintedBefore;
     // pack these?
     uint256 public constant TOKEN = 0;
     uint256 public constant NFT1 = 1;
@@ -21,6 +23,16 @@ contract StreamLoot is ERC1155 {
         require(msg.sender == owner, "StreamLoot: NOT_OWNER");
         _;
     }
+
+    // modifier notMintedBefore(address _to, uint256[] _ids) {
+    //     uint256 length = _ids.length;
+    //     for (uint i = 0; i < length; i++ ) {
+    //         if (_ids[i] != 0) require(!mintedBefore[_id][_to], "StreamLoot: NFT_MINTED_BEFORE");
+    //         // just do this in batch
+    //     }
+        
+    //     _;
+    // }
 
     constructor()
         ERC1155("https://streamloot.xyz/api/streamer/item/{id}.json")
@@ -74,6 +86,10 @@ contract StreamLoot is ERC1155 {
     ) external onlyOwner {
         _burnBatch(_from, _ids, _amounts);
     }
+
+    // function _mintBatch() override {
+
+    // }
 
     // transfer, add a tax for the streamer?
 }

@@ -57,7 +57,24 @@ describe("StreamLoot.sol", () => {
 
   describe("mint()", () => {
     beforeEach(async () => await deploy());
-    it("Creates tokens successfully", async () => {});
+    it("Creates token successfully", async () => {
+      expect(await StreamLoot.balanceOf(streamer1.address, 0)).to.equal(0);
+      await StreamLoot.connect(owner).mint(
+        streamer1.address,
+        0,
+        200,
+        ethers.utils.formatBytes32String("")
+      );
+      expect(await StreamLoot.balanceOf(streamer1.address, 0)).to.equal(200);
+      expect(await StreamLoot.balanceOf(streamer1.address, 1)).to.equal(0);
+      await StreamLoot.connect(owner).mint(
+        streamer1.address,
+        1,
+        1,
+        ethers.utils.formatBytes32String("")
+      );
+      expect(await StreamLoot.balanceOf(streamer1.address, 1)).to.equal(1);
+    });
     it("Fails if: NFTs already minted for given userId", async () => {});
     it("Fails if: not owner", async () => {
       await expect(
