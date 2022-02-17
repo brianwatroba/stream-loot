@@ -11,7 +11,7 @@ router.get("/", auth, async (req, res) => {
     const supports = await Support.find({ user: req.user.id }).sort({
       createdAt: -1,
     });
-    res.json(supports);
+    res.status(200).json(supports);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

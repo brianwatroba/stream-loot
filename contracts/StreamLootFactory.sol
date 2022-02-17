@@ -16,19 +16,20 @@ contract StreamLootFactory {
         _;
     }
 
-    constructor(address _owner) {
-        owner = _owner;
+    constructor() {
+        owner = msg.sender;
     }
 
-    function createStreamLoot(
-        address _owner,
-        address _streamerAddr,
-        uint256 _streamerId
-    ) external onlyOwner returns (address newStreamLoot) {
+    function createStreamLoot(address _streamerAddr, uint256 _streamerId)
+        external
+        onlyOwner
+        returns (address newStreamLoot)
+    {
         require(
-            streamerIdToStreamLoot[_streamerId] != address(0),
+            streamerIdToStreamLoot[_streamerId] == address(0),
             "StreamLootFactory: EXISTS"
         );
+       
         bytes memory bytecode = type(StreamLoot).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(_streamerId));
         // uses CREATE2 for deterministic StreamerLoot addresses
@@ -41,7 +42,7 @@ contract StreamLootFactory {
             )
         }
         IStreamLoot(newStreamLoot).initialize(
-            _owner,
+            owner,
             _streamerAddr,
             _streamerId
         );
@@ -53,7 +54,7 @@ contract StreamLootFactory {
 
     // not sure if we need this
     function streamLootFor(uint256 _streamerId)
-        internal
+        external
         view
         returns (address streamLoot)
     {
@@ -62,10 +63,10 @@ contract StreamLootFactory {
                 uint256(
                     keccak256(
                         abi.encodePacked(
-                            hex"ff",
+                            bytes1(0xff),
                             address(this),
                             keccak256(abi.encodePacked(_streamerId)),
-                            type(StreamLoot).creationCode
+                            keccak256(type(StreamLoot).creationCode)
                         )
                     )
                 )

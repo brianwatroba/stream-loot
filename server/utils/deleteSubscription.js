@@ -6,9 +6,7 @@ const deleteSubscription = async (uuid) => {
   const uuidParam = `?id=${uuid}`;
 
   try {
-    const res = await axios.delete(TWITCH_SUB_URL + uuidParam, TWITCH_HEADERS);
-    console.log("deleteSubscription()", res);
-    return res;
+    return await axios.delete(TWITCH_SUB_URL + uuidParam, TWITCH_HEADERS);
   } catch (error) {
     console.log(error);
     return error;
