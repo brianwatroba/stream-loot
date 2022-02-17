@@ -3,10 +3,10 @@ const { TWITCH_SUB_URL, SL_WEBHOOK_URL } = require("../constants/urls");
 const { TWITCH_HEADERS } = require("../constants/headers");
 const config = require("config");
 
-const requestSubscription = async (streamerId) => {
+const requestSubscription = async (streamerId, subType) => {
   const body = {
     version: "1",
-    type: "channel.follow",
+    type: subType,
     condition: {
       broadcaster_user_id: streamerId,
     },

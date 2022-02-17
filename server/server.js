@@ -6,20 +6,17 @@ const getSubscriptions = require("./utils/getSubscriptions");
 const deleteAllSubscriptions = require("./utils/deleteAllSubscriptions");
 const deleteSubscription = require("./utils/deleteSubscription");
 
-connectDB();
+const { CHANNEL_FOLLOW } = require("./constants/subTypes");
 
-// const path = require("path");
-// const cors = require("cors");
+connectDB();
 
 const app = express();
 const PORT = config.get("PORT");
 
 // Init middleware
-
 app.use(express.static("static"));
 app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: false }));
-// app.use(cors());
 
 // Routes
 app.use("/webhooks/callback", require("./routes/webhooks/callback"));
@@ -28,10 +25,11 @@ const server = app.listen(PORT, () =>
   console.log(`Server started on port ${PORT}`)
 );
 
-// requestSubscription("71092938");
+// requestSubscription("71092938", CHANNEL_FOLLOW);
 deleteAllSubscriptions();
 // getSubscriptions();
 
-// on server close, ensure we close all subs
+// on server crash, ensure we close all subs somehow
+// handle duplicate subscriptions, have fallback to delete extras
 
 module.exports = server;
