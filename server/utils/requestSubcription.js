@@ -1,31 +1,23 @@
-const twitchSubUrl = `https://api.twitch.tv/helix/eventsub/subscriptions`;
-const ngrokUrl = "https://49d6-2603-7000-3800-81f0-00-a040.ngrok.io";
-const webhookUrl = ngrokUrl + "/api/webhook";
 const axios = require("axios");
+const { TWITCH_SUB_URL, SL_WEBHOOK_URL } = require("../constants/urls");
+const { TWITCH_HEADERS } = require("../constants/headers");
 
-const requestSubscription = async () => {
-  const headers = {
-    Authorization: `Bearer ` + process.env.TWITCH_API_TOKEN,
-    "Client-ID": process.env.TWITCH_CLIENT_ID,
-    "Content-Type": "application/json",
-  };
-
+const requestSubscription = async (streamerId) => {
   const body = {
     version: "1",
     type: "channel.follow",
     condition: {
-      broadcaster_user_id: "19571641",
+      broadcaster_user_id: streamerId,
     },
     transport: {
       method: "webhook",
-      callback: webhookUrl,
-      // need function to generate secrets
-      secret: "abcdefghij0123456789",
+      callback: SL_WEBHOOK_URL,
+      secret: process.env.EVENT_SUB_SECRET,
     },
   };
 
   try {
-    const res = await axios.post(twitchSubUrl, body, { headers });
+    const res = await axios.post(TWITCH_SUB_URL, body, TWITCH_HEADERS);
     return res;
   } catch (error) {
     console.log(error);
