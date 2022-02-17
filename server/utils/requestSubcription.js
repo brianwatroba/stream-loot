@@ -1,6 +1,7 @@
 const axios = require("axios");
 const { TWITCH_SUB_URL, SL_WEBHOOK_URL } = require("../constants/urls");
 const { TWITCH_HEADERS } = require("../constants/headers");
+const config = require("config");
 
 const requestSubscription = async (streamerId) => {
   const body = {
@@ -12,12 +13,13 @@ const requestSubscription = async (streamerId) => {
     transport: {
       method: "webhook",
       callback: SL_WEBHOOK_URL,
-      secret: process.env.EVENT_SUB_SECRET,
+      secret: config.get("EVENT_SUB_SECRET"),
     },
   };
 
   try {
     const res = await axios.post(TWITCH_SUB_URL, body, TWITCH_HEADERS);
+    console.log("requestSubscription()", res);
     return res;
   } catch (error) {
     console.log(error);

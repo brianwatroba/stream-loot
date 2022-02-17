@@ -38,7 +38,8 @@ const server = app.listen(PORT, () =>
 );
 
 // requestSubscription("71092938");
-// deleteSubscription("499863cb-039d-40b2-9d57-e48595095306");
-getSubscriptions();
+// deleteSubscription("fd675083-b51f-42d3-956e-ca5be77cad13");
+deleteAllSubscriptions();
+// getSubscriptions();
 
 module.exports = server;

@@ -3,10 +3,10 @@ const {
   TWITCH_MESSAGE_ID,
   TWITCH_MESSAGE_TIMESTAMP,
   TWITCH_MESSAGE_SIGNATURE,
-  TWITCH_MESSAGE_TYPE,
+  // TWITCH_MESSAGE_TYPE,
 } = require("../constants/headers");
 
-const verifyCallbackSrc = (req, res, next) => {
+const verifyCallbackSrc = (req) => {
   // if (req.headers[TWITCH_MESSAGE_TYPE] === "webhook_callback_verification") {
   const HMAC_PREFIX = "sha256=";
   const secret = process.env.EVENT_SUB_SECRET;
@@ -19,10 +19,11 @@ const verifyCallbackSrc = (req, res, next) => {
     console.log("body", req.body);
     const challenge = req.body.challenge;
     console.log("challenge", challenge);
-    next();
+    if (challenge) {
+      return challenge;
+    }
   } else {
-    console.log("invalid source");
-    res.sendStatus(403);
+    return undefined;
   }
   // }
 };
