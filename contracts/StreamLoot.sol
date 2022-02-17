@@ -74,4 +74,6 @@ contract StreamLoot is ERC1155 {
     ) external onlyOwner {
         _burnBatch(_from, _ids, _amounts);
     }
+
+    // transfer, add a tax for the streamer?
 }

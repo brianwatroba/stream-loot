@@ -42,7 +42,7 @@ describe("StreamLoot.sol", () => {
     });
   });
 
-  describe("initialize", () => {
+  describe("initialize()", () => {
     beforeEach(async () => await deploy());
     it("Fails if: not factory", async () => {
       await expect(
@@ -50,6 +50,38 @@ describe("StreamLoot.sol", () => {
           streamer1.address,
           streamer1.address,
           streamer1Id
+        )
+      ).to.be.revertedWith("StreamLoot: NOT_OWNER");
+    });
+  });
+
+  describe("mint()", () => {
+    beforeEach(async () => await deploy());
+    it("Creates tokens successfully", async () => {});
+    it("Fails if: NFTs already minted for given userId", async () => {});
+    it("Fails if: not owner", async () => {
+      await expect(
+        StreamLoot.connect(streamer1).mint(
+          streamer1.address,
+          1,
+          1,
+          ethers.utils.formatBytes32String("")
+        )
+      ).to.be.revertedWith("StreamLoot: NOT_OWNER");
+    });
+  });
+
+  describe("mintBatch()", () => {
+    beforeEach(async () => await deploy());
+    it("Creates multiple tokens at once successfully", async () => {});
+    it("Fails if: any NFTs already minted for given userId", async () => {});
+    it("Fails if: not owner", async () => {
+      await expect(
+        StreamLoot.connect(streamer1).mintBatch(
+          streamer1.address,
+          [1],
+          [1],
+          ethers.utils.formatBytes32String("")
         )
       ).to.be.revertedWith("StreamLoot: NOT_OWNER");
     });
