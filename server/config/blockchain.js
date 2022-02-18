@@ -6,6 +6,24 @@ const config = require("config");
 const provider = new ethers.providers.JsonRpcProvider();
 const wallet = new ethers.Wallet(config.get("WALLET_PRIVATE_KEY"), provider);
 
+const deploy = async () => {
+  const StreamLootFactory = await (
+    await ethers.getContractFactory("StreamLootFactory")
+  )
+    .connect(owner)
+    .deploy();
+  await createStreamLoot(streamer1, streamer1Id);
+  const StreamLootAddr = await StreamLootFactory.allStreamLoots(0);
+  const StreamLoot = await ethers.getContractAt("StreamLoot", StreamLootAddr);
+};
+
+const createStreamLoot = async (signer, streamerId) => {
+  await StreamLootFactory.connect(owner).createStreamLoot(
+    signer.address,
+    streamerId
+  );
+};
+
 // STAGING: Rinkeby
 
 // PROD: POLYGON

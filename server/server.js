@@ -1,13 +1,6 @@
 const express = require("express");
 const config = require("config");
 const connectDB = require("./config/db");
-const seedDb = require("./utils/seedDb");
-const requestSubscription = require("./utils/requestSubcription");
-const getSubscriptions = require("./utils/getSubscriptions");
-const deleteAllSubscriptions = require("./utils/deleteAllSubscriptions");
-const wallet = require("./config/blockchain");
-
-const { CHANNEL_FOLLOW } = require("./constants/subTypes");
 
 connectDB();
 
@@ -26,15 +19,5 @@ app.use("/api/supports", require("./routes/api/supports"));
 const server = app.listen(PORT, () =>
   console.log(`Server started on port ${PORT}`)
 );
-
-// requestSubscription("71092938", CHANNEL_FOLLOW);
-// deleteAllSubscriptions();
-// seedDb();
-// getSubscriptions();
-
-// on server crash, ensure we close all subs somehow
-// handle duplicate subscriptions, have fallback to delete extras
-
-console.log(wallet);
 
 module.exports = server;
