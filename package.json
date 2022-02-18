@@ -24,5 +24,10 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.5.0"
+  },
+  "scripts": {
+    "dev": "npm run server",
+    "server": "npm start --prefix server",
+    "hardhat": "npx hardhat node --prefix server"
   }
 }

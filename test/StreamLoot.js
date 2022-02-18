@@ -2,19 +2,16 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
 describe("StreamLoot.sol", () => {
-  let StreamLootFactory,
-    StreamLoot,
-    owner,
-    streamer1,
-    streamer2,
-    viewer1,
-    viewer2;
-
-  let streamer1Id = 71092938;
-  let streamer2Id = 67890;
+  let StreamLootFactory;
+  let StreamLoot;
+  let owner;
+  let streamer1;
+  let streamer2;
+  const streamer1Id = 71092938;
+  const streamer2Id = 67890;
 
   const deploy = async () => {
-    [owner, streamer1, streamer2, viewer1, viewer2] = await ethers.getSigners();
+    [owner, streamer1, streamer2] = await ethers.getSigners();
     StreamLootFactory = await (
       await ethers.getContractFactory("StreamLootFactory")
     )

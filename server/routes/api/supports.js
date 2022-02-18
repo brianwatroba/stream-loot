@@ -1,20 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../../middleware/auth");
+// const auth = require("../../middleware/auth");
 const Support = require("../../models/Support");
 
 // @route    GET api/supports
 // @desc     Get all supports by logged in user
 // @access   Private
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const supports = await Support.find({ user: req.user.id }).sort({
       createdAt: -1,
     });
-    res.status(200).json(supports);
+    return res.status(200).json(supports);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+    return res.status(500).send("Server error");
   }
 });
 

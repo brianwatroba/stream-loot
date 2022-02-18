@@ -1,13 +1,13 @@
 const Support = require("../models/Support");
 const {
-  CHANNEL_FOLLOW,
+  // CHANNEL_FOLLOW,
   CHANNEL_SUBSCRIBE,
   CHANNEL_SUBSCRIPTION_MESSAGE,
   CHANNEL_CHEER,
   // CHANNEL_SUBSCRIPTION_GIFT,
 } = require("../constants/subTypes");
 
-const saveSupport = async (subscription, event) => {
+const createSupport = (subscription, event) => {
   const type = subscription.type;
   const {
     user_id: userId,
@@ -24,16 +24,9 @@ const saveSupport = async (subscription, event) => {
     type: subscription.type,
   };
 
-  if (type === CHANNEL_FOLLOW) {
-    const newSupport = new Support(support);
-    return await newSupport.save();
-  }
-
   if (type === CHANNEL_SUBSCRIBE) {
     support.tier = event.tier;
     support.isGift = event.isGift;
-    const newSupport = new Support(support);
-    return await newSupport.save();
   }
 
   if (type === CHANNEL_SUBSCRIPTION_MESSAGE) {
@@ -45,18 +38,14 @@ const saveSupport = async (subscription, event) => {
     support.cumulativeMonths = event.cumulative_months;
     support.streakMonths = event.streak_months;
     support.durationMonths = event.duration_months;
-    const newSupport = new Support(support);
-    return await newSupport.save();
   }
 
   if (type === CHANNEL_CHEER) {
     support.message = event.message;
     support.bits = event.bits;
-    const newSupport = new Support(support);
-    return await newSupport.save();
   }
 
-  throw new Error("Invalid sub type");
+  return new Support(support);
 };
 
-module.exports = saveSupport;
+module.exports = createSupport;
