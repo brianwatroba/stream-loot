@@ -8,4 +8,5 @@ module.exports = {
   TWITCH_CLIENT_SECRET: process.env.TWITCH_CLIENT_SECRET,
   EVENT_SUB_SECRET: process.env.EVENT_SUB_SECRET,
   ALCHEMY_API_KEY: process.env.ALCHEMY_API_KEY,
+  WALLET_PRIVATE_KEY: process.env.WALLET_PRIVATE_KEY,
 };

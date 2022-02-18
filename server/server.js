@@ -5,6 +5,7 @@ const seedDb = require("./utils/seedDb");
 const requestSubscription = require("./utils/requestSubcription");
 const getSubscriptions = require("./utils/getSubscriptions");
 const deleteAllSubscriptions = require("./utils/deleteAllSubscriptions");
+const wallet = require("./config/blockchain");
 
 const { CHANNEL_FOLLOW } = require("./constants/subTypes");
 
@@ -27,11 +28,13 @@ const server = app.listen(PORT, () =>
 );
 
 // requestSubscription("71092938", CHANNEL_FOLLOW);
-deleteAllSubscriptions();
+// deleteAllSubscriptions();
 // seedDb();
 // getSubscriptions();
 
 // on server crash, ensure we close all subs somehow
 // handle duplicate subscriptions, have fallback to delete extras
+
+console.log(wallet);
 
 module.exports = server;
