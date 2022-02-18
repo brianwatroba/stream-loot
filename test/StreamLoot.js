@@ -32,6 +32,31 @@ describe("StreamLoot.sol", () => {
     );
   };
 
+  const mintToken = async (signer, to, id, amount) => {
+    return await StreamLoot.connect(signer).mint(
+      to,
+      id,
+      amount,
+      ethers.utils.formatBytes32String("")
+    );
+  };
+  const mintTokens = async (signer, to, ids, amounts) => {
+    return await StreamLoot.connect(signer).mintBatch(
+      to,
+      ids,
+      amounts,
+      ethers.utils.formatBytes32String("")
+    );
+  };
+
+  const burnToken = async (signer, from, id, amount) => {
+    return await StreamLoot.connect(signer).burn(from, id, amount);
+  };
+
+  const burnTokens = async (signer, from, ids, amounts) => {
+    return await StreamLoot.connect(signer).burnBatch(from, ids, amounts);
+  };
+
   describe("Deployment", () => {
     beforeEach(async () => await deploy());
     it("Deploys successfully", async () => {
@@ -57,50 +82,110 @@ describe("StreamLoot.sol", () => {
 
   describe("mint()", () => {
     beforeEach(async () => await deploy());
-    it("Creates token successfully", async () => {
+    it("Mints a token amount successfully", async () => {
       expect(await StreamLoot.balanceOf(streamer1.address, 0)).to.equal(0);
-      await StreamLoot.connect(owner).mint(
-        streamer1.address,
-        0,
-        200,
-        ethers.utils.formatBytes32String("")
-      );
+      await mintToken(owner, streamer1.address, 0, 200);
       expect(await StreamLoot.balanceOf(streamer1.address, 0)).to.equal(200);
       expect(await StreamLoot.balanceOf(streamer1.address, 1)).to.equal(0);
-      await StreamLoot.connect(owner).mint(
-        streamer1.address,
-        1,
-        1,
-        ethers.utils.formatBytes32String("")
-      );
+      await mintToken(owner, streamer1.address, 1, 1);
       expect(await StreamLoot.balanceOf(streamer1.address, 1)).to.equal(1);
     });
-    it("Fails if: NFTs already minted for given userId", async () => {});
+    it("Fails if: NFTs already minted for given userId", async () => {
+      await mintToken(owner, streamer1.address, 1, 1);
+      await expect(
+        mintToken(owner, streamer1.address, 1, 1)
+      ).to.be.revertedWith("StreamLoot: NFT_MINTED_BEFORE");
+    });
     it("Fails if: not owner", async () => {
       await expect(
-        StreamLoot.connect(streamer1).mint(
-          streamer1.address,
-          1,
-          1,
-          ethers.utils.formatBytes32String("")
-        )
+        mintToken(streamer1, streamer1.address, 1, 1)
       ).to.be.revertedWith("StreamLoot: NOT_OWNER");
     });
   });
 
   describe("mintBatch()", () => {
     beforeEach(async () => await deploy());
-    it("Creates multiple tokens at once successfully", async () => {});
-    it("Fails if: any NFTs already minted for given userId", async () => {});
+    it("Mints multiple token amounts at once successfully", async () => {
+      expect(
+        await StreamLoot.balanceOfBatch(
+          [streamer1.address, streamer1.address, streamer1.address],
+          [0, 1, 2]
+        )
+      ).to.deep.equal([
+        ethers.BigNumber.from(0),
+        ethers.BigNumber.from(0),
+        ethers.BigNumber.from(0),
+      ]);
+      await mintTokens(owner, streamer1.address, [0, 1, 2], [200, 1, 1]);
+      expect(
+        await StreamLoot.balanceOfBatch(
+          [streamer1.address, streamer1.address, streamer1.address],
+          [0, 1, 2]
+        )
+      ).to.deep.equal([
+        ethers.BigNumber.from(200),
+        ethers.BigNumber.from(1),
+        ethers.BigNumber.from(1),
+      ]);
+    });
+    it("Fails if: any NFTs already minted for given userId", async () => {
+      await mintToken(owner, streamer1.address, 1, 1);
+      await expect(
+        mintTokens(owner, streamer1.address, [0, 1], [200, 1])
+      ).to.be.revertedWith("StreamLoot: NFT_MINTED_BEFORE");
+    });
     it("Fails if: not owner", async () => {
       await expect(
-        StreamLoot.connect(streamer1).mintBatch(
-          streamer1.address,
-          [1],
-          [1],
-          ethers.utils.formatBytes32String("")
-        )
+        mintTokens(streamer1, streamer1.address, [0, 1, 2], [200, 1, 1])
       ).to.be.revertedWith("StreamLoot: NOT_OWNER");
+    });
+  });
+
+  describe("burn()", () => {
+    beforeEach(async () => await deploy());
+    it("Burns a token amount successfully", async () => {
+      await mintToken(owner, streamer1.address, 1, 1);
+      expect(await StreamLoot.balanceOf(streamer1.address, 1)).to.equal(1);
+      await burnToken(streamer1, streamer1.address, 1, 1);
+      expect(await StreamLoot.balanceOf(streamer1.address, 0)).to.equal(0);
+    });
+    it("Fails if: not tokenholder", async () => {
+      await expect(
+        burnToken(streamer1, streamer2.address, 1, 1)
+      ).to.be.revertedWith("StreamLoot: NOT_TOKENHOLDER");
+    });
+  });
+
+  describe("burnBatch()", () => {
+    beforeEach(async () => await deploy());
+    it("Burns multiple token amounts at once successfully", async () => {
+      await mintTokens(owner, streamer1.address, [0, 1, 2], [200, 1, 1]);
+      expect(
+        await StreamLoot.balanceOfBatch(
+          [streamer1.address, streamer1.address, streamer1.address],
+          [0, 1, 2]
+        )
+      ).to.deep.equal([
+        ethers.BigNumber.from(200),
+        ethers.BigNumber.from(1),
+        ethers.BigNumber.from(1),
+      ]);
+      await burnTokens(streamer1, streamer1.address, [0, 1, 2], [200, 1, 1]);
+      expect(
+        await StreamLoot.balanceOfBatch(
+          [streamer1.address, streamer1.address, streamer1.address],
+          [0, 1, 2]
+        )
+      ).to.deep.equal([
+        ethers.BigNumber.from(0),
+        ethers.BigNumber.from(0),
+        ethers.BigNumber.from(0),
+      ]);
+    });
+    it("Fails if: not tokenholder", async () => {
+      await expect(
+        burnToken(streamer1, streamer2.address, 1, 1)
+      ).to.be.revertedWith("StreamLoot: NOT_TOKENHOLDER");
     });
   });
 });
