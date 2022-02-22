@@ -4,7 +4,10 @@ const config = require("config");
 // DEV: Hardhat
 
 const provider = new ethers.providers.JsonRpcProvider();
-const wallet = new ethers.Wallet(config.get("WALLET_PRIVATE_KEY"), provider);
+const serverWallet = new ethers.Wallet(
+  config.get("WALLET_PRIVATE_KEY"),
+  provider
+);
 
 const deploy = async () => {
   const StreamLootFactory = await (

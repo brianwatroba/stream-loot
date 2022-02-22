@@ -77,4 +77,36 @@ describe("StreamLootFactory.sol", () => {
       ).to.be.revertedWith("StreamLootFactory: NOT_OWNER");
     });
   });
+
+  describe("decode", () => {
+    beforeEach(async () => await deploy());
+    it.only("decodes a given hash and sig", async () => {
+      console.log("owner address", owner.address);
+      const hashRaw = ethers.utils.solidityKeccak256(
+        ["address", "uint256"],
+        [streamer1.address, streamer1Id]
+      );
+
+      // console.log("hashRaw", hashRaw);
+
+      const hash = ethers.utils.hashMessage(ethers.utils.arrayify(hashRaw));
+      console.log("hash", hash);
+
+      const message = ethers.utils.arrayify(hashRaw);
+      const sig = await owner.signMessage(message);
+      console.log("sig", sig);
+
+      console.log("length", message.length);
+
+      const verified = ethers.utils.verifyMessage(message, sig);
+      console.log("verified", verified);
+
+      const res = await StreamLootFactory.connect(streamer1).decode(
+        streamer1.address,
+        streamer1Id,
+        sig
+      );
+      console.log("res", res);
+    });
+  });
 });

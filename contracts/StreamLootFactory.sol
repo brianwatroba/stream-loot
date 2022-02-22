@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "hardhat/console.sol";
+import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "./StreamLoot.sol";
 import "../interfaces/IStreamLoot.sol";
 
@@ -20,6 +21,20 @@ contract StreamLootFactory {
         owner = msg.sender;
     }
 
+    function decode(
+        address _streamerAddr,
+        uint256 _streamerId,
+        bytes memory _signature
+    ) public pure returns (address signer) {
+        bytes32 hash = ECDSA.toEthSignedMessageHash(
+            keccak256(abi.encodePacked(_streamerAddr, _streamerId))
+        );
+
+        signer = ECDSA.recover(hash, _signature);
+
+        // signer = hash.toEthSignedMessageHash().recover(_signature);
+    }
+
     function createStreamLoot(address _streamerAddr, uint256 _streamerId)
         external
         onlyOwner
@@ -29,7 +44,7 @@ contract StreamLootFactory {
             streamerIdToStreamLoot[_streamerId] == address(0),
             "StreamLootFactory: EXISTS"
         );
-       
+
         bytes memory bytecode = type(StreamLoot).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(_streamerId));
         // uses CREATE2 for deterministic StreamerLoot addresses
