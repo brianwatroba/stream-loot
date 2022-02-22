@@ -12,42 +12,30 @@ contract StreamLootFactory {
     mapping(uint256 => address) public streamerIdToStreamLoot;
     mapping(address => uint256) public streamLootToStreamerId;
 
-    modifier onlyOwner() {
-        require(msg.sender == owner, "StreamLootFactory: NOT_OWNER");
-        _;
-    }
-
     constructor() {
         owner = msg.sender;
     }
 
-    function decode(
+    function createStreamLoot(
         address _streamerAddr,
         uint256 _streamerId,
         bytes memory _signature
-    ) public pure returns (address signer) {
-        bytes32 hash = ECDSA.toEthSignedMessageHash(
-            keccak256(abi.encodePacked(_streamerAddr, _streamerId))
-        );
-
-        signer = ECDSA.recover(hash, _signature);
-
-        // signer = hash.toEthSignedMessageHash().recover(_signature);
-    }
-
-    function createStreamLoot(address _streamerAddr, uint256 _streamerId)
-        external
-        onlyOwner
-        returns (address newStreamLoot)
-    {
+    ) external returns (address newStreamLoot) {
         require(
             streamerIdToStreamLoot[_streamerId] == address(0),
             "StreamLootFactory: EXISTS"
         );
 
+        // Ensures the server approved the creation
+        bytes32 hash = ECDSA.toEthSignedMessageHash(
+            keccak256(abi.encodePacked(_streamerAddr, _streamerId))
+        );
+        address signer = ECDSA.recover(hash, _signature);
+        require(signer == owner, "StreamLootFactory: INVALID SIG");
+
+        // Uses CREATE2 for deterministic StreamerLoot addresses
         bytes memory bytecode = type(StreamLoot).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(_streamerId));
-        // uses CREATE2 for deterministic StreamerLoot addresses
         assembly {
             newStreamLoot := create2(
                 0,

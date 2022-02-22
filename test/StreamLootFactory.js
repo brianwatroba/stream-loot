@@ -17,15 +17,24 @@ describe("StreamLootFactory.sol", () => {
     )
       .connect(owner)
       .deploy();
-    await createStreamLoot(streamer1, streamer1Id);
+    await createStreamLoot(owner, streamer1.address, streamer1Id);
     const StreamLootAddr = await StreamLootFactory.allStreamLoots(0);
     StreamLoot = await ethers.getContractAt("StreamLoot", StreamLootAddr);
   };
 
-  const createStreamLoot = async (signer, streamerId) => {
-    await StreamLootFactory.connect(owner).createStreamLoot(
-      signer.address,
-      streamerId
+  const createStreamLoot = async (signer, streamerAddr, streamerId) => {
+    const hashRaw = ethers.utils.solidityKeccak256(
+      ["address", "uint256"],
+      [streamerAddr, streamerId]
+    );
+
+    const message = ethers.utils.arrayify(hashRaw);
+    const sig = await signer.signMessage(message);
+
+    await StreamLootFactory.connect(signer).createStreamLoot(
+      streamerAddr,
+      streamerId,
+      sig
     );
   };
 
@@ -42,7 +51,7 @@ describe("StreamLootFactory.sol", () => {
   describe("createStreamLoot()", () => {
     beforeEach(async () => await deploy());
     it("Creates and stores multiple StreamLoots", async () => {
-      await createStreamLoot(streamer2, streamer2Id);
+      await createStreamLoot(owner, streamer2.address, streamer2Id);
       const StreamLootOne = await StreamLootFactory.allStreamLoots(0);
       const StreamLootTwo = await StreamLootFactory.allStreamLoots(1);
       expect(StreamLootOne).to.be.properAddress;
@@ -64,49 +73,19 @@ describe("StreamLootFactory.sol", () => {
       expect(StreamLoot.address).to.equal(expectedAddr);
     });
     it("Fails if: StreamLoot for given streamerId already exists", async () => {
-      await expect(createStreamLoot(streamer1, streamer1Id)).to.be.revertedWith(
-        "StreamLootFactory: EXISTS"
-      );
-    });
-    it("Fails if: not owner", async () => {
       await expect(
-        StreamLootFactory.connect(streamer2).createStreamLoot(
-          streamer2.address,
-          streamer2Id
-        )
-      ).to.be.revertedWith("StreamLootFactory: NOT_OWNER");
+        createStreamLoot(owner, streamer1.address, streamer1Id)
+      ).to.be.revertedWith("StreamLootFactory: EXISTS");
     });
-  });
-
-  describe("decode", () => {
-    beforeEach(async () => await deploy());
-    it.only("decodes a given hash and sig", async () => {
-      console.log("owner address", owner.address);
-      const hashRaw = ethers.utils.solidityKeccak256(
-        ["address", "uint256"],
-        [streamer1.address, streamer1Id]
-      );
-
-      // console.log("hashRaw", hashRaw);
-
-      const hash = ethers.utils.hashMessage(ethers.utils.arrayify(hashRaw));
-      console.log("hash", hash);
-
-      const message = ethers.utils.arrayify(hashRaw);
-      const sig = await owner.signMessage(message);
-      console.log("sig", sig);
-
-      console.log("length", message.length);
-
-      const verified = ethers.utils.verifyMessage(message, sig);
-      console.log("verified", verified);
-
-      const res = await StreamLootFactory.connect(streamer1).decode(
-        streamer1.address,
-        streamer1Id,
-        sig
-      );
-      console.log("res", res);
+    it("Fails if: Invalid sig provided", async () => {
+      const incorrectSig = await owner.signMessage("this is incorrect");
+      await expect(
+        StreamLootFactory.connect(owner).createStreamLoot(
+          streamer2.address,
+          streamer2Id,
+          incorrectSig
+        )
+      ).to.be.revertedWith("StreamLootFactory: INVALID SIG");
     });
   });
 });

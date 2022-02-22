@@ -17,15 +17,24 @@ describe("StreamLoot.sol", () => {
     )
       .connect(owner)
       .deploy();
-    await createStreamLoot(streamer1, streamer1Id);
+    await createStreamLoot(owner, streamer1.address, streamer1Id);
     const StreamLootAddr = await StreamLootFactory.allStreamLoots(0);
     StreamLoot = await ethers.getContractAt("StreamLoot", StreamLootAddr);
   };
 
-  const createStreamLoot = async (signer, streamerId) => {
-    await StreamLootFactory.connect(owner).createStreamLoot(
-      signer.address,
-      streamerId
+  const createStreamLoot = async (signer, streamerAddr, streamerId) => {
+    const hashRaw = ethers.utils.solidityKeccak256(
+      ["address", "uint256"],
+      [streamerAddr, streamerId]
+    );
+
+    const message = ethers.utils.arrayify(hashRaw);
+    const sig = await signer.signMessage(message);
+
+    await StreamLootFactory.connect(signer).createStreamLoot(
+      streamerAddr,
+      streamerId,
+      sig
     );
   };
 
