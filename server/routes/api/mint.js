@@ -7,10 +7,15 @@ const { ethers } = require("ethers");
 // const TWITCH_CLIENT_SECRET = config.get("TWITCH_CLIENT_SECRET");
 // const TWITCH_CLIENT_ID = config.get("TWITCH_CLIENT_ID");
 
-// @route  POST api/twitch/auth
-// @desc   get Twitch user token after client Twitch login, call Twitch API to get info about that user, then return info to client
-// @access public
+// @route  POST api/mint
+// @desc   get message sig for users to call contract to mint their tokens
+// @access private
 
-router.post("/", auth, async (req, res) => {});
+router.post("/", async (req, res) => {
+  // check twitch auth
+  // look up if they have enough supports, check against it
+  // if they do, sign the transaction, get sig
+  // send them the sig
+});
 
 module.exports = router;

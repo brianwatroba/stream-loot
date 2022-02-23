@@ -1,8 +1,21 @@
-// this is for the streamer
-//
-// auths to ensure it's a twitch user, makes sure they're a partner if we can
+const express = require("express");
+const router = express.Router();
+const axios = require("axios").default;
+const auth = require("../../middleware/auth");
+const { ethers } = require("ethers");
+// const config = require("config");
+// const TWITCH_CLIENT_SECRET = config.get("TWITCH_CLIENT_SECRET");
+// const TWITCH_CLIENT_ID = config.get("TWITCH_CLIENT_ID");
 
-// routes
-// create: can call to create a streamloot with all the right parameters, from client
-// get: state of all streamloot, pulls from both mongo and contracts to see what's minted
-// send: send tokens and nfts
+// @route  POST api/streamloot
+// @desc   get message sig for streamers to create a streamloot
+// @access private
+
+router.post("/", async (req, res) => {
+  // warn on front end if streamloot already exists
+  // check twitch auth
+  // if they do, sign the transaction, get sig
+  // send them the sig
+});
+
+module.exports = router;
