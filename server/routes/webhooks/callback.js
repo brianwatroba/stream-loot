@@ -7,6 +7,7 @@ router.post("/", verifyCallbackSrc, async (req, res) => {
   const { subscription, event } = req.body;
   try {
     const support = createSupport(subscription, event);
+    console.log(req);
     return await support.save();
   } catch (error) {
     console.log(error);
