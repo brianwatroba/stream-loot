@@ -85,7 +85,7 @@ describe("StreamLootFactory.sol", () => {
           streamer2Id,
           incorrectSig
         )
-      ).to.be.revertedWith("StreamLootFactory: INVALID SIG");
+      ).to.be.revertedWith("StreamLootFactory: INVALID_SIG");
     });
   });
 });

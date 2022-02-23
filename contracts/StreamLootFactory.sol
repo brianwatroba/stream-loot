@@ -1,10 +1,10 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-import "hardhat/console.sol";
-import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+// import "hardhat/console.sol";
 import "./StreamLoot.sol";
 import "../interfaces/IStreamLoot.sol";
+import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 contract StreamLootFactory {
     address public owner;
@@ -31,7 +31,7 @@ contract StreamLootFactory {
             keccak256(abi.encodePacked(_streamerAddr, _streamerId))
         );
         address signer = ECDSA.recover(hash, _signature);
-        require(signer == owner, "StreamLootFactory: INVALID SIG");
+        require(signer == owner, "StreamLootFactory: INVALID_SIG");
 
         // Uses CREATE2 for deterministic StreamerLoot addresses
         bytes memory bytecode = type(StreamLoot).creationCode;
