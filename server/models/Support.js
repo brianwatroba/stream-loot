@@ -52,6 +52,11 @@ const SupportSchema = new mongoose.Schema(
       default: false,
       required: true,
     },
+    tokenId: {
+      type: Number,
+      required: true,
+      default: null,
+    },
   },
   { timestamps: true }
 );

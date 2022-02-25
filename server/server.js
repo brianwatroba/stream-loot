@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 // Routes
 app.use("/webhooks/callback", require("./routes/webhooks/callback"));
 app.use("/api/supports", require("./routes/api/supports"));
+app.use("/api/mint", require("./routes/api/mint"));
 
 const server = app.listen(PORT, () =>
   console.log(`Server started on port ${PORT}`)
