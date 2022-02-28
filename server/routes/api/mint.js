@@ -4,7 +4,6 @@ const axios = require("axios").default;
 const auth = require("../../middleware/auth");
 const config = require("config");
 const { ethers } = require("ethers");
-const { wallet } = require("../../config/signer");
 // const config = require("config");
 // const TWITCH_CLIENT_SECRET = config.get("TWITCH_CLIENT_SECRET");
 // const TWITCH_CLIENT_ID = config.get("TWITCH_CLIENT_ID");
