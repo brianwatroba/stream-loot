@@ -3,8 +3,12 @@ import Navbar from "./components/Navbar";
 import ninjaSupport from "./images/ninjasupport.png";
 import FeatureItem from "./components/FeatureItem";
 import chain from "./images/chain.png";
+import controller from "./images/controller.png";
+import viewer from "./images/viewer.png";
 import crystals from "./images/crystals.png";
 import polygon from "./images/polygon.png";
+import FAQPanel from "./components/FAQPanel";
+import FAQs from "./constants/FAQs";
 
 const App = () => {
   return (
@@ -22,7 +26,7 @@ const App = () => {
           <div className="text-4xl font-serif font-black text-black text-center lg:text-7xl mt-4 ">
             Support streamers, <br></br>get crypto
           </div>
-          <div className="text-md lg:text-2xl text-black80 font-light font-sans text-center my-8">
+          <div className="text-md lg:text-2xl text-black80 font-normal font-sans text-center my-8">
             Turn your channel’s donations and subs <br></br> into crypto-based
             rewards for fans
           </div>
@@ -56,6 +60,40 @@ const App = () => {
             alt="polygon"
           />
           <div />
+        </div>
+        <div className="text-2xl font-serif font-bold text-black33 text-center lg:text-4xl mt-48 mb-2">
+          Learn more
+        </div>
+        <div className="text-sm lg:text-lg text-black80 font-normal font-sans text-center italic mb-16">
+          FAQs and common questions
+        </div>
+        <div className="flex flex-row items-start justify-center">
+          <div className="flex flex-col align-center justify-center">
+            <div className="flex align-center justify-center">
+              <img
+                src={controller}
+                className="h-24 w-30 lg:h-10 lg:w-12 mb-2"
+                alt="controller"
+              />
+            </div>
+            <div className="text-center font-sans text-lg text-black80 italic mb-4">
+              Streamers
+            </div>
+            <FAQPanel faqs={FAQs.streamers} />
+          </div>
+          <div className="flex flex-col align-center justify-center">
+            <div className="flex align-center justify-center">
+              <img
+                src={viewer}
+                className="h-24 w-30 lg:h-10 lg:w-12 mb-2"
+                alt="controller"
+              />
+            </div>
+            <div className="text-center font-sans text-lg text-black80 italic mb-4">
+              Viewers
+            </div>
+            <FAQPanel faqs={FAQs.streamers} />
+          </div>
         </div>
       </div>
     </>
