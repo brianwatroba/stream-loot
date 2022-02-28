@@ -2,7 +2,7 @@ import React from "react";
 
 const FeatureItem = ({ imgSrc, title, subtitle, alt }) => {
   return (
-    <div className="align-center justify-center text-center">
+    <div className="col-span-3 align-center justify-center text-center">
       <div className="flex align-center justify-center">
         <img src={imgSrc} className="h-24 w-30 lg:h-32 lg:w-50" alt={alt} />
       </div>

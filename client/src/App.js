@@ -26,7 +26,7 @@ const App = () => {
             Turn your channel’s donations and subs <br></br> into crypto-based
             rewards for fans
           </div>
-          <button className="flex bg-primary py-4 px-8 font-black text-white font-serif text-center align-center justify-center self-center rounded-md">
+          <button className="flex bg-primary py-4 px-8 font-black text-white font-serif text-center align-center justify-center self-center rounded-md hover:bg-primary-light">
             GET STARTED
           </button>
         </div>
@@ -35,7 +35,8 @@ const App = () => {
         <div className="text-2xl font-serif font-bold text-black33 text-center lg:text-4xl mt-48 mb-24">
           How it works
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 align-center">
+        <div className="grid grid-cols-11 align-center place-content-center">
+          <div />
           <FeatureItem
             title="Customize"
             subtitle="Streamers can customize and mint their own Loot Set on the blockchain, which connects to Twitch donations and subs"
@@ -54,6 +55,7 @@ const App = () => {
             imgSrc={polygon}
             alt="polygon"
           />
+          <div />
         </div>
       </div>
     </>
