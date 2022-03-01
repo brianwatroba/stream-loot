@@ -9,7 +9,7 @@ const FAQPanel = ({ faqs, backgroundColor }) => {
   };
 
   return (
-    <div className="p-6 bg-[#FFF7E2] rounded-lg mb-12 mx-1 lg:mx-4">
+    <div className="p-4 bg-[#FFF7E2] rounded-lg mb-12 mx-1 lg:mx-4">
       {faqs.map((faq) => (
         <FAQEntry
           id={faqs.indexOf(faq) + 1}

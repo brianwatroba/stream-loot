@@ -17,7 +17,7 @@ const App = () => {
       <div className="bg-gradient-to-b from-[#e7d7ff] to-white">
         <Navbar />
         <div className="flex flex-col justify-center align-center py-24">
-          <div className="flex align-center justify-center mt-14">
+          <div className="flex align-center justify-center lg:mt-14">
             <img
               src={ninjaSupport}
               className="h-24 w-30 lg:h-32 lg:w-50"
@@ -37,7 +37,7 @@ const App = () => {
         </div>
       </div>
       <div className="flex flex-col justify-center align-center pt-12">
-        <div className="text-3xl font-serif font-bold text-black33 text-center lg:text-4xl mt-48 mb-20 lg:mb-24">
+        <div className="text-3xl font-serif font-bold text-black33 text-center lg:text-4xl mt-48 mb-12 lg:mb-24">
           How it works
         </div>
         <div className="grid grod-cols-1 lg:grid-cols-11 align-center place-content-center lg:mb-48">
