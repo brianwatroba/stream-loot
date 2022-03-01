@@ -38,17 +38,17 @@ Automatically convert donation/subscription events on a Streamer's channel to to
 
 ![Project structure](https://streamloot.s3.us-east-2.amazonaws.com/streamlootstructure.png)
 
-## Contract adddresses
+## Contract addresses
 
-#### Polgygon (Main Net)
+#### Polygon (Main Net)
 
-- _StreamLootFactory.sol:_ `0x4D5Cf0c3FA910B99A6fF740e0F2aec2590882772`
-- _StreamLoot.sol:_ `0x4D5Cf0c3FA910B99A6fF740e0F2aec2590882772`
+- _StreamLootFactory.sol:_ TBD
+- _StreamLoot.sol:_ TBD
 
 #### Test (Polygon - Mumbai)
 
-- _StreamLootFactory.sol:_ `0x4D5Cf0c3FA910B99A6fF740e0F2aec2590882772`
-- _StreamLoot.sol:_ `0x4D5Cf0c3FA910B99A6fF740e0F2aec2590882772`
+- _StreamLootFactory.sol:_ TBD
+- _StreamLoot.sol:_ TBD
 
 ## Local setup
 
