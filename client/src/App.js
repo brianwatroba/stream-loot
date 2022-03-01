@@ -7,6 +7,7 @@ import controller from "./images/controller.png";
 import viewer from "./images/viewer.png";
 import crystals from "./images/crystals.png";
 import polygon from "./images/polygon.png";
+import chest from "./images/chest2.png";
 import FAQPanel from "./components/FAQPanel";
 import FAQs from "./constants/FAQs";
 
@@ -35,11 +36,11 @@ const App = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-col justify-center align-center py-12">
-        <div className="text-2xl font-serif font-bold text-black33 text-center lg:text-4xl mt-48 mb-24">
+      <div className="flex flex-col justify-center align-center pt-12">
+        <div className="text-3xl font-serif font-bold text-black33 text-center lg:text-4xl mt-48 mb-20 lg:mb-24">
           How it works
         </div>
-        <div className="grid grid-cols-11 align-center place-content-center">
+        <div className="grid grod-cols-1 lg:grid-cols-11 align-center place-content-center lg:mb-48">
           <div />
           <FeatureItem
             title="Customize"
@@ -61,18 +62,18 @@ const App = () => {
           />
           <div />
         </div>
-        <div className="text-2xl font-serif font-bold text-black33 text-center lg:text-4xl mt-48 mb-2">
+        <div className="text-3xl font-serif font-bold text-black33 text-center lg:text-4xl mt-48 mb-2">
           Learn more
         </div>
         <div className="text-sm lg:text-lg text-black80 font-normal font-sans text-center italic mb-16">
           FAQs and common questions
         </div>
-        <div className="flex flex-row items-start justify-center">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center">
           <div className="flex flex-col align-center justify-center">
             <div className="flex align-center justify-center">
               <img
                 src={controller}
-                className="h-24 w-30 lg:h-10 lg:w-12 mb-2"
+                className="h-10 w-12 mb-2"
                 alt="controller"
               />
             </div>
@@ -83,17 +84,24 @@ const App = () => {
           </div>
           <div className="flex flex-col align-center justify-center">
             <div className="flex align-center justify-center">
-              <img
-                src={viewer}
-                className="h-24 w-30 lg:h-10 lg:w-12 mb-2"
-                alt="controller"
-              />
+              <img src={viewer} className="h-10 w-12 mb-2" alt="controller" />
             </div>
             <div className="text-center font-sans text-lg text-black80 italic mb-4">
               Viewers
             </div>
             <FAQPanel faqs={FAQs.streamers} />
           </div>
+        </div>
+        <div className="flex flex-col justify-center py-48 bg-gradient-to-t from-[#FFFAED] to-white">
+          <FeatureItem
+            title="View your loot"
+            subtitle="Log in to Twitch to see what's ready for you!"
+            imgSrc={chest}
+            alt="chest"
+          />
+          <button className="flex bg-primary mt-6 py-4 px-8 font-black text-white font-serif text-center align-center justify-center self-center rounded-md hover:bg-primary-light">
+            GET STARTED
+          </button>
         </div>
       </div>
     </>

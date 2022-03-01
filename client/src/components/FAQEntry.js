@@ -9,6 +9,7 @@ const FAQEntry = ({ id, handleChange, question, answer, expanded }) => {
     <Accordion
       expanded={expanded === `panel${id}`}
       onChange={handleChange(`panel${id}`)}
+      elevation="0"
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}

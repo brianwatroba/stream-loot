@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FAQEntry from "./FAQEntry";
 
-const FAQPanel = ({ faqs }) => {
+const FAQPanel = ({ faqs, backgroundColor }) => {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -9,7 +9,7 @@ const FAQPanel = ({ faqs }) => {
   };
 
   return (
-    <div className=" p-4 bg-[#FFF7E2] rounded-md mx-2">
+    <div className="p-6 bg-[#FFF7E2] rounded-lg mb-12 mx-1 lg:mx-4">
       {faqs.map((faq) => (
         <FAQEntry
           id={faqs.indexOf(faq) + 1}
