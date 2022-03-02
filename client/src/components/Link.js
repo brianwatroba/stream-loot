@@ -5,7 +5,7 @@ const Link = ({ active, href, title }) => {
     <div
       className={`text-sm md:text-base text-black50 ${
         active ? "font-bold text-black" : " "
-      }font-sans cursor-pointer`}
+      }font-sans cursor-pointer `}
       onClick={() => {
         if (href) window.location = href;
       }}

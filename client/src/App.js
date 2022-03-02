@@ -67,7 +67,7 @@ const App = () => {
         FAQs and common questions
       </div>
       <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center">
-        <div className="flex flex-col align-center justify-center">
+        <div className="flex flex-col w-full align-center justify-center">
           <div className="flex align-center justify-center">
             <img src={controller} className="h-10 w-12 mb-2" alt="controller" />
           </div>
@@ -76,14 +76,14 @@ const App = () => {
           </div>
           <FAQPanel faqs={FAQs.streamers} />
         </div>
-        <div className="flex flex-col align-center justify-center">
+        <div className="flex flex-col w-full align-center justify-center">
           <div className="flex align-center justify-center">
             <img src={viewer} className="h-10 w-12 mb-2" alt="controller" />
           </div>
           <div className="text-center font-sans text-lg text-black80 italic mb-4">
             Viewers
           </div>
-          <FAQPanel faqs={FAQs.streamers} />
+          <FAQPanel faqs={FAQs.viewers} />
         </div>
       </div>
       <div className="flex flex-col justify-center py-36 bg-gradient-to-t from-[#FFFAED] to-white">
