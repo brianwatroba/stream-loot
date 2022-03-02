@@ -26,7 +26,11 @@ const FAQs = {
     ],
     [
       "How do I create a Loot Set?",
-      "Click or tap 'Get Started' to log into Twitch and begin customizing your set. Once you're happy with it, you can mint it on the Block Chain. We will then log all donation and sub events for your viewers to claim their Loot. It's that easy!",
+      "Click or tap 'Get Started' to log into Twitch and begin customizing your set. Once you're happy with it, you can mint it on the blockchain. We will then log all donation and sub events for your viewers to claim their Loot. It's that easy!",
+    ],
+    [
+      "Do I have to grant any channel permissions?",
+      "To play around with customization, no. To mint your Loot Set on the blockchain, yes. Once minted, we need read access to your channel bits and subscriptions to log eligible Loot for your viewers. This is similar to StreamLab's permissions to show events in your overlays. We'll prompt you for access via Twitch login when you're ready to mint.",
     ],
     [
       "What does it cost?",
@@ -60,7 +64,7 @@ const FAQs = {
     ],
     [
       "This is on the Blockchain?",
-      "Yes. Once you mint your earned Loot, it exists on the blockchain, fully decentralized, owned by the wallet you mint it to. You can then send, trade, and show it off how ever you'd like.",
+      "Yes. Once you mint your earned Loot, it exists on the blockchain. Fully decentralized, owned by the wallet you mint it to. You can send, trade, and show it off how ever you'd like.",
     ],
     [
       "How do I see my reserved Loot?",
@@ -72,7 +76,7 @@ const FAQs = {
     ],
     [
       "What does it cost?",
-      "Between $1-3 USD to mint your available loot. Costs are variable based on network congestion and crypto prices.",
+      "Between $1-3 USD to mint your available Loot. Costs are variable based on network congestion and crypto prices.",
     ],
     [
       "Can Loot be traded?",

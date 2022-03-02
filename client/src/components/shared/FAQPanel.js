@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import FAQEntry from "./FAQEntry";
+import React from "react";
+import { FAQEntry } from "../componentsIndex";
 
-const FAQPanel = ({ faqs, backgroundColor }) => {
+const FAQPanel = ({ faqs }) => {
   const [expanded, setExpanded] = React.useState(false);
-
-  const handleChange = (panel) => (event, isExpanded) => {
+  const handleChange = (panel) => (isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
