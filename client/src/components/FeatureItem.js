@@ -1,8 +1,10 @@
 import React from "react";
 
-const FeatureItem = ({ imgSrc, title, subtitle, alt }) => {
+const FeatureItem = ({ imgSrc, title, subtitle, alt, className }) => {
   return (
-    <div className="col-span-3 align-center justify-center text-center mt-16 lg:mt-0">
+    <div
+      className={`${className} col-span-3 align-center justify-center text-center mt-16 lg:mt-0`}
+    >
       <div className="flex align-center justify-center">
         <img src={imgSrc} className="h-24 w-30 lg:h-32 lg:w-50" alt={alt} />
       </div>
