@@ -22,7 +22,7 @@ const Landing = () => {
               src={ninjasupport}
               className="h-24 w-30 lg:h-32 lg:w-50"
               alt="Ninja Support"
-            ></img>
+            />
           </div>
           <div className="text-4xl font-serif font-black text-black text-center lg:text-7xl mt-4 ">
             Support streamers, <br></br>get crypto
