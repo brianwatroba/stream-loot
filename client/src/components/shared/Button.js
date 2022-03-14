@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Button = ({ children, href }) => {
+  let navigate = useNavigate();
   const handleClick = () => {
-    if (href) window.location = href;
+    if (href) navigate(href);
   };
   return (
     <button

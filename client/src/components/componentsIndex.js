@@ -8,3 +8,4 @@ export { default as FeatureItem } from "./shared/FeatureItem";
 
 // Pages
 export { default as Landing } from "./pages/Landing";
+export { default as MyLoot } from "./pages/MyLoot";
