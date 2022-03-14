@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { FAQEntry } from "../componentsIndex";
 
 const FAQPanel = ({ faqs }) => {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
   const handleChange = (panel) => (isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
