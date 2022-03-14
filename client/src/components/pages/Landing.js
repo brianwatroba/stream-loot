@@ -17,22 +17,25 @@ const Landing = () => {
     <>
       <GradientBackground>
         <Navbar />
-        <FlexColumn className="py-24">
-          <img
-            src={ninjasupport}
-            className="h-24 w-30 lg:h-32 lg:w-50 lg:mt-14"
-            alt="Ninja Support"
-          />
-          <Title className="mt-4">
-            Support streamers, <br></br>get crypto
-          </Title>
-          <Subtitle className="my-8">
-            Turn your channel’s donations and subs<br></br>into crypto-based
-            rewards for fans
-          </Subtitle>
-          <Button href="/myloot">GET STARTED</Button>
-        </FlexColumn>
+        <Section>
+          <FlexColumn className="py-24">
+            <img
+              src={ninjasupport}
+              className="h-24 w-30 lg:h-32 lg:w-50 lg:mt-14"
+              alt="Ninja Support"
+            />
+            <Title className="mt-4">
+              Support streamers, <br></br>get crypto
+            </Title>
+            <Subtitle className="my-8">
+              Turn your channel’s donations and subs<br></br>into crypto-based
+              rewards for fans
+            </Subtitle>
+            <Button href="/myloot">GET STARTED</Button>
+          </FlexColumn>
+        </Section>
       </GradientBackground>
+
       <SectionTitle className="mt-48 mb-8 lg:mb-24">How it works</SectionTitle>
       <div className="grid grid-cols-1 lg:grid-cols-11 align-center place-content-center lg:mb-48">
         <div />
@@ -83,6 +86,7 @@ const Landing = () => {
   );
 };
 
+const Section = tw.div`flex flex-col justify-center items-center py-20 lg:py-48 w-full`;
 const Title = tw.div`text-4xl font-serif font-black text-black text-center lg:text-7xl`;
 const Subtitle = tw.div`text-sm lg:text-2xl text-black80 font-normal font-sans text-center`;
 const SectionTitle = tw.div`text-3xl font-serif font-bold text-black33 text-center lg:text-4xl`;
