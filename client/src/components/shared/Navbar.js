@@ -1,21 +1,55 @@
 import React from "react";
-import { Link } from "../componentsIndex";
+import { useLocation, useNavigate } from "react-router-dom";
+import tw from "twin.macro";
 import { sllogo } from "../../images/imagesIndex";
+import navbarLinks from "../../constants/navbarLinks";
 
 const Navbar = () => {
   return (
-    <div className="flex flex-col md:flex-row md:grow justify-between p-6">
-      <div className="flex justify-center mb-2 md:mb-0">
-        <img src={sllogo} className="h-5 lg:h-7" alt="Stream Loot Logo"></img>
-      </div>
-      <div className="hidden md:flex flex-row space-x-6 justify-center">
-        <Link title="Home" active="true" />
-        <Link title="My Loot" />
-        <Link title="Learn more" />
-        <Link title="About us" />
-      </div>
+    <AppBar>
+      <Logo />
+      <NavLinks />
+    </AppBar>
+  );
+};
+
+const NavLink = ({ active, href, title }) => {
+  const navigate = useNavigate();
+  const handleClick = () => navigate(href);
+  return (
+    <div
+      onClick={handleClick}
+      className={`text-sm md:text-base text-black50 font-sans cursor-pointer${
+        active ? " font-bold text-black" : ""
+      }`}
+    >
+      {title}
     </div>
   );
 };
+
+const NavLinks = () => {
+  const location = useLocation();
+  return (
+    <div className="hidden md:flex flex-row space-x-6 justify-center">
+      {navbarLinks.map((link, index) => (
+        <NavLink
+          title={link[0]}
+          href={link[1]}
+          key={index}
+          active={link[1] === location.pathname}
+        />
+      ))}
+    </div>
+  );
+};
+const AppBar = tw.div`flex flex-col md:flex-row md:flex-grow justify-between p-6`;
+const Logo = () => (
+  <img
+    src={sllogo}
+    alt="Stream Loot Logo"
+    className="h-5 lg:h-7 mb-2 md:mb-0"
+  />
+);
 
 export default Navbar;

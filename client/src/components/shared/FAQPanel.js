@@ -4,7 +4,7 @@ import { FAQEntry } from "../componentsIndex";
 const FAQPanel = ({ faqs }) => {
   const [expanded, setExpanded] = useState(false);
   const handleChange = (panel) => (isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+    expanded === panel ? setExpanded(false) : setExpanded(panel);
   };
 
   return (

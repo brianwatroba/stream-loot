@@ -7,6 +7,8 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Landing />} />
       <Route path="/myloot" element={<MyLoot />} />
+      <Route path="/create" element={<MyLoot />} />
+      <Route path="/about" element={<MyLoot />} />
     </Routes>
   );
 };
