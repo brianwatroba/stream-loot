@@ -1,6 +1,6 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import tw from "twin.macro";
+import { useLocation, useNavigate } from "react-router-dom";
 import { sllogo } from "../../images/imagesIndex";
 import navbarLinks from "../../constants/navbarLinks";
 
@@ -44,12 +44,17 @@ const NavLinks = () => {
   );
 };
 const AppBar = tw.div`flex flex-col md:flex-row md:flex-grow justify-between p-6`;
-const Logo = () => (
-  <img
-    src={sllogo}
-    alt="Stream Loot Logo"
-    className="h-5 lg:h-7 mb-2 md:mb-0"
-  />
-);
+const Logo = () => {
+  const navigate = useNavigate();
+  const handleClick = () => navigate("/");
+  return (
+    <img
+      src={sllogo}
+      alt="Stream Loot Logo"
+      className="h-5 lg:h-7 mb-2 md:mb-0 cursor-pointer"
+      onClick={handleClick}
+    />
+  );
+};
 
 export default Navbar;
