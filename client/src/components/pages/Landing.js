@@ -10,7 +10,6 @@ import {
   chest2,
   ninjasupport,
 } from "../../images/imagesIndex";
-import FAQs from "../../constants/FAQs";
 
 const Landing = () => {
   return (
@@ -59,18 +58,7 @@ const Landing = () => {
         <SectionSubtitle className="mb-16">
           FAQs and common questions
         </SectionSubtitle>
-        <div className="flex flex-col lg:flex-row lg:items-start justify-center">
-          <FlexColumn className="w-full">
-            <Icon src={controller} alt="controller" />
-            <SectionSubtitle className="mb-4">Streamers</SectionSubtitle>
-            <FAQPanel faqs={FAQs.streamers} />
-          </FlexColumn>
-          <FlexColumn className="w-full">
-            <Icon src={viewer} alt="controller" />
-            <SectionSubtitle className="mb-4">Viewers</SectionSubtitle>
-            <FAQPanel faqs={FAQs.viewers} />
-          </FlexColumn>
-        </div>
+        <FAQPanel />
       </Section>
       <FlexColumn className="bg-gradient-to-t from-[#FFFAED] to-white">
         <Section>
@@ -87,9 +75,9 @@ const Landing = () => {
 
 const Section = tw.div`flex flex-col justify-center items-center py-28 lg:py-48 w-full`;
 const Title = tw.div`text-4xl font-serif font-black text-black text-center lg:text-7xl`;
-const Subtitle = tw.div`text-sm lg:text-2xl text-black80 font-normal font-sans text-center`;
+const Subtitle = tw.div`text-lg lg:text-2xl text-black80 font-normal font-sans text-center`;
 const SectionTitle = tw.div`text-3xl font-serif font-bold text-black33 text-center lg:text-4xl`;
-const SectionSubtitle = tw.div`flex justify-center text-sm lg:text-lg text-black80 font-normal font-sans text-center italic`;
+const SectionSubtitle = tw.div`flex justify-center text-lg text-black80 font-normal font-sans text-center italic`;
 const GradientBackground = tw.div`bg-gradient-to-b from-[#e7d7ff] to-white`;
 const FlexColumn = tw.div`flex flex-col justify-center items-center`;
 

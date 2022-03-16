@@ -7,3 +7,5 @@ export { default as ninjasupport } from "./ninjasupport.png";
 export { default as polygon } from "./polygon.png";
 export { default as sllogo } from "./sllogo.png";
 export { default as viewer } from "./viewer.png";
+export { default as twitchpartnericon } from "./twitchpartnerbadge.png";
+export { default as twitchfollowericon } from "./twitchfollowericon.png";
