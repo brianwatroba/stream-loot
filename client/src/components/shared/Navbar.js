@@ -1,5 +1,6 @@
 import React from "react";
 import tw from "twin.macro";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { useLocation, useNavigate } from "react-router-dom";
 import { sllogo } from "../../images/imagesIndex";
 import navbarLinks from "../../constants/navbarLinks";
@@ -8,7 +9,11 @@ const Navbar = () => {
   return (
     <AppBar>
       <Logo />
-      <NavLinks />
+      <button className="py-3 px-6 flex bg-white items-center sm:text-xs md:text-sm rounded-md font-serif font-bold text-black33 hover:bg-[#EEEEEE]">
+        LAUNCH APP
+        <ArrowForwardRoundedIcon fontSize="small" sx={{ marginLeft: "4px" }} />
+      </button>
+      {/* <NavLinks /> */}
     </AppBar>
   );
 };
@@ -43,7 +48,7 @@ const NavLinks = () => {
     </div>
   );
 };
-const AppBar = tw.div`flex flex-col md:flex-row md:flex-grow justify-between p-6`;
+const AppBar = tw.div`flex flex-row justify-between items-center p-6`;
 const Logo = () => {
   const navigate = useNavigate();
   const handleClick = () => navigate("/");
@@ -51,7 +56,7 @@ const Logo = () => {
     <img
       src={sllogo}
       alt="Stream Loot Logo"
-      className="h-5 lg:h-7 mb-2 md:mb-0 cursor-pointer"
+      className="h-5 lg:h-6 mb-2 md:mb-0 cursor-pointer"
       onClick={handleClick}
     />
   );

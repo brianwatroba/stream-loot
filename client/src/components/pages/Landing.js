@@ -25,7 +25,7 @@ const Landing = () => {
             Turn your channel’s donations and subs<br></br>into crypto-based
             rewards for fans
           </Subtitle>
-          <Button href="/myloot">GET STARTED</Button>
+          <Button href="/myloot">LAUNCH APP</Button>
         </Section>
       </GradientBackground>
       <Section>
@@ -66,7 +66,7 @@ const Landing = () => {
           <SectionSubtitle className="mb-8">
             Log into Twitch to see what's waiting
           </SectionSubtitle>
-          <Button href="/myloot">GET STARTED</Button>
+          <Button href="/myloot">LAUNCH APP</Button>
         </Section>
       </FlexColumn>
     </>
@@ -83,9 +83,6 @@ const FlexColumn = tw.div`flex flex-col justify-center items-center`;
 
 const BannerImg = (props) => (
   <img className="h-24 w-30 lg:h-32 lg:w-50" src={props.src} alt={props.alt} />
-);
-const Icon = (props) => (
-  <img className="h-10 w-12 mb-2" src={props.src} alt={props.alt} />
 );
 
 export default Landing;
