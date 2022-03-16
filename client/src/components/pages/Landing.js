@@ -25,7 +25,10 @@ const Landing = () => {
             Turn your channel’s donations and subs<br></br>into crypto-based
             rewards for fans
           </Subtitle>
-          <Button href="/myloot">LAUNCH APP</Button>
+          <Button href="/">LAUNCH APP</Button>
+          <SectionSubtitle className="mt-4">
+            Beta launching spring 2022
+          </SectionSubtitle>
         </Section>
       </GradientBackground>
       <Section>
@@ -66,7 +69,10 @@ const Landing = () => {
           <SectionSubtitle className="mb-8">
             Log into Twitch to see what's waiting
           </SectionSubtitle>
-          <Button href="/myloot">LAUNCH APP</Button>
+          <Button href="/">LAUNCH APP</Button>
+          <SectionSubtitle className="mt-4">
+            Beta launching spring 2022
+          </SectionSubtitle>
         </Section>
       </FlexColumn>
     </>

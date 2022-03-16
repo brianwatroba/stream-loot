@@ -4,16 +4,14 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
-// import "hardhat/console.sol";
-
 contract StreamLoot is ERC1155 {
     address public factory;
     address public owner;
     address public streamerAddr;
     uint256 public streamerId;
-    // Mapping from token ID to token mint history
+    // @Notice: mapping for token ID to token mint history
     mapping(uint256 => mapping(address => bool)) public mintedBefore;
-    // pack these?
+    // TODO: pack variables
     uint256 public constant TOKEN = 0;
     uint256 public constant NFT1 = 1;
     uint256 public constant NFT2 = 2;
@@ -25,7 +23,7 @@ contract StreamLoot is ERC1155 {
     }
 
     constructor()
-        // need to set right URI
+        // TODO: set correct URIs
         ERC1155("https://streamloot.xyz/api/streamer/item/{id}.json")
     {
         factory = msg.sender;
@@ -49,7 +47,7 @@ contract StreamLoot is ERC1155 {
         bytes memory _data,
         bytes memory _signature
     ) external {
-        // need to add the streamerId or the address of this contract into the sig
+        // TODO: add the streamerId or the address of this contract into the sig
         bytes32 hash = ECDSA.toEthSignedMessageHash(
             keccak256(abi.encodePacked(_to, _id, _amount))
         );
@@ -68,7 +66,7 @@ contract StreamLoot is ERC1155 {
         bytes memory _data,
         bytes memory _signature
     ) external {
-        // need to add the streamerId or the address of this contract into the sig
+        // TODO: add the streamerId or the address of this contract into the sig
         uint256 length = _ids.length;
         bytes32 hash = ECDSA.toEthSignedMessageHash(
             keccak256(abi.encodePacked(_to, _ids, _amounts))

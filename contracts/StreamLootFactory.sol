@@ -1,7 +1,6 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-// import "hardhat/console.sol";
 import "./StreamLoot.sol";
 import "../interfaces/IStreamLoot.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
@@ -26,14 +25,14 @@ contract StreamLootFactory {
             "StreamLootFactory: EXISTS"
         );
 
-        // Ensures the server approved the creation
+        // @Notice: ensures the server approved the creation
         bytes32 hash = ECDSA.toEthSignedMessageHash(
             keccak256(abi.encodePacked(_streamerAddr, _streamerId))
         );
         address signer = ECDSA.recover(hash, _signature);
         require(signer == owner, "StreamLootFactory: INVALID_SIG");
 
-        // Uses CREATE2 for deterministic StreamerLoot addresses
+        // @Notice: uses CREATE2 for deterministic StreamerLoot addresses
         bytes memory bytecode = type(StreamLoot).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(_streamerId));
         assembly {
@@ -55,7 +54,6 @@ contract StreamLootFactory {
         emit StreamLootCreated(newStreamLoot, _streamerAddr, _streamerId);
     }
 
-    // not sure if we need this
     function streamLootFor(uint256 _streamerId)
         external
         view
