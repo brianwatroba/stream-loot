@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, FeatureItem, FAQPanel, Button } from "../componentsIndex";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 import {
   chain,
   controller,
@@ -16,7 +16,7 @@ const Landing = () => {
     <>
       <GradientBackground>
         <Navbar />
-        <Section>
+        <Section align="top">
           <BannerImg src={ninjasupport} alt="Ninja Support" />
           <Title className="mt-4">
             Support streamers, <br></br>get crypto
@@ -26,9 +26,7 @@ const Landing = () => {
             rewards for fans
           </Subtitle>
           <Button href="/">LAUNCH APP</Button>
-          <SectionSubtitle className="mt-4">
-            Beta launching spring 2022
-          </SectionSubtitle>
+          <Disclaimer className="mt-4">Beta access: Spring 2022</Disclaimer>
         </Section>
       </GradientBackground>
       <Section>
@@ -67,23 +65,27 @@ const Landing = () => {
         <Section>
           <FeatureItem title="View your loot" imgSrc={chest2} alt="chest" />
           <SectionSubtitle className="mb-8">
-            Log into Twitch to see what's waiting
+            Log in with Twitch to get started
           </SectionSubtitle>
           <Button href="/">LAUNCH APP</Button>
-          <SectionSubtitle className="mt-4">
-            Beta launching spring 2022
-          </SectionSubtitle>
+          <Disclaimer className="mt-4">Beta access: Spring 2022</Disclaimer>
         </Section>
       </FlexColumn>
     </>
   );
 };
 
-const Section = tw.div`flex flex-col justify-center items-center py-28 lg:py-48 w-full`;
-const Title = tw.div`text-4xl font-serif font-black text-black text-center lg:text-7xl`;
-const Subtitle = tw.div`text-lg lg:text-2xl text-black80 font-normal font-sans text-center`;
+// const Section = styled.div(({ align }) => [
+//   tw`flex flex-col items-center py-28 lg:py-48 w-full`,
+//   align === "top" ? tw`pt-0 pb-28` : tw`py-28`,
+// ]);
+
+const Section = tw.div`flex flex-col items-center pt-28 pb-44 w-full`;
+const Title = tw.div`text-5xl font-serif font-black text-black text-center lg:text-7xl`;
+const Subtitle = tw.div`text-lg lg:text-2xl text-black50 font-normal font-sans text-center`;
 const SectionTitle = tw.div`text-3xl font-serif font-bold text-black33 text-center lg:text-4xl`;
 const SectionSubtitle = tw.div`flex justify-center text-lg text-black80 font-normal font-sans text-center italic`;
+const Disclaimer = tw.div`flex justify-center text-sm text-black80 font-normal font-sans text-center italic`;
 const GradientBackground = tw.div`bg-gradient-to-b from-[#e7d7ff] to-white`;
 const FlexColumn = tw.div`flex flex-col justify-center items-center`;
 
