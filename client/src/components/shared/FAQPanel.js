@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { FAQEntry } from "../componentsIndex";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   twitchpartnericon,
   twitchfollowericon,
@@ -52,12 +55,35 @@ const FAQPanel = () => {
   );
 };
 
+const FAQEntry = ({ id, handleExpand, question, answer, expanded }) => {
+  return (
+    <Accordion
+      expanded={expanded === `panel${id}`}
+      onChange={handleExpand(`panel${id}`)}
+      elevation="0"
+    >
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls={`panel${id}bh-content`}
+        id={`panel${id}bh-header`}
+        sx={{
+          fontFamily: "open sans",
+          fontWeight: "500",
+          color: "#505050",
+          backgroundColor: "#FFFCF5",
+          borderRadius: "8px",
+        }}
+      >
+        {question}
+      </AccordionSummary>
+      <AccordionDetails className="text-black80 font-normal font-sans">
+        {answer}
+      </AccordionDetails>
+    </Accordion>
+  );
+};
+
 const ToggleButton = ({ children, handleToggle, category, img }) => {
-  // const handleClick = (e) => {
-  // console.log(e);
-  // setFaqCategory(e.target.value.toLowerCase());
-  // };
-  console.log(children);
   return (
     <button
       className={`py-3 px-12 font-bold rounded flex flex-row items-center ${

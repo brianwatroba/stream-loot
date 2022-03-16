@@ -1,6 +1,5 @@
 // Shared
 export { default as Button } from "./shared/Button";
-export { default as FAQEntry } from "./shared/FAQEntry";
 export { default as FAQPanel } from "./shared/FAQPanel";
 export { default as Link } from "./shared/Link";
 export { default as Navbar } from "./shared/Navbar";
