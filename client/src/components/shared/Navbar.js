@@ -9,46 +9,16 @@ const Navbar = () => {
   return (
     <AppBar>
       <Logo />
-      <button className="py-3 px-6 flex bg-white items-center sm:text-xs md:text-sm rounded-md font-serif font-bold text-black33 hover:bg-[#EEEEEE]">
+      <NavButton>
         LAUNCH APP
         <ArrowForwardRoundedIcon fontSize="small" sx={{ marginLeft: "4px" }} />
-      </button>
-      {/* <NavLinks /> */}
+      </NavButton>
     </AppBar>
   );
 };
 
-const NavLink = ({ active, href, title }) => {
-  const navigate = useNavigate();
-  const handleClick = () => navigate(href);
-  return (
-    <div
-      onClick={handleClick}
-      className={`text-sm md:text-base text-black50 font-sans cursor-pointer${
-        active ? " font-bold text-black" : ""
-      }`}
-    >
-      {title}
-    </div>
-  );
-};
-
-const NavLinks = () => {
-  const location = useLocation();
-  return (
-    <div className="hidden md:flex flex-row space-x-6 justify-center">
-      {navbarLinks.map((link, index) => (
-        <NavLink
-          title={link[0]}
-          href={link[1]}
-          key={index}
-          active={link[1] === location.pathname}
-        />
-      ))}
-    </div>
-  );
-};
-const AppBar = tw.div`flex flex-row justify-between items-center p-6`;
+const NavButton = tw.button`hidden md:flex py-2 px-4 md:py-3 md:px-6  bg-white items-center text-xs md:text-sm rounded-md font-serif font-bold text-black33 hover:bg-[#EEEEEE]`;
+const AppBar = tw.div`flex flex-row justify-center md:justify-between items-center p-6`;
 const Logo = () => {
   const navigate = useNavigate();
   const handleClick = () => navigate("/");
@@ -56,7 +26,7 @@ const Logo = () => {
     <img
       src={sllogo}
       alt="Stream Loot Logo"
-      className="h-5 lg:h-6 mb-2 md:mb-0 cursor-pointer"
+      className="h-4 lg:h-6 mb-2 md:mb-0 cursor-pointer"
       onClick={handleClick}
     />
   );

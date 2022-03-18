@@ -1,10 +1,8 @@
 import React from "react";
 import { Navbar, FeatureItem, FAQPanel, Button } from "../componentsIndex";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
 import {
   chain,
-  controller,
-  viewer,
   crystals,
   polygon,
   chest2,
@@ -75,13 +73,8 @@ const Landing = () => {
   );
 };
 
-// const Section = styled.div(({ align }) => [
-//   tw`flex flex-col items-center py-28 lg:py-48 w-full`,
-//   align === "top" ? tw`pt-0 pb-28` : tw`py-28`,
-// ]);
-
-const Section = tw.div`flex flex-col items-center pt-28 pb-44 w-full`;
-const Title = tw.div`text-5xl font-serif font-black text-black text-center lg:text-7xl`;
+const Section = tw.div`flex flex-col items-center pt-14 pb-24 md:pt-28 md:pb-44 w-full`;
+const Title = tw.div`text-4xl font-serif font-black text-black text-center lg:text-7xl`;
 const Subtitle = tw.div`text-lg lg:text-2xl text-black50 font-normal font-sans text-center`;
 const SectionTitle = tw.div`text-3xl font-serif font-bold text-black33 text-center lg:text-4xl`;
 const SectionSubtitle = tw.div`flex justify-center text-lg text-black80 font-normal font-sans text-center italic`;

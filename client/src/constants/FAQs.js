@@ -26,7 +26,7 @@ const FAQs = {
     ],
     [
       "How do I create a Loot Set?",
-      "Click or tap 'Get Started' to log into Twitch and begin customizing your set. Once you're happy with it, you can mint it on the blockchain. We will then log all donation and sub events for your viewers to claim their Loot. It's that easy!",
+      "Click or tap 'Launch App' to log into Twitch and begin customizing your set. Once you're happy with it, you can mint it on the blockchain. We will then log all donation and sub events for your viewers to claim their Loot. It's that easy!",
     ],
     [
       "Do I have to grant any channel permissions?",
@@ -68,7 +68,7 @@ const FAQs = {
     ],
     [
       "How do I see my reserved Loot?",
-      "Click or tap on the 'Get Started' button to see what Loot you've earned and what's waiting for you.",
+      "Click or tap on the 'Launch App' button to see what Loot you've earned and what's waiting for you.",
     ],
     [
       "How do I mint my reserved Loot on the blockchain?",

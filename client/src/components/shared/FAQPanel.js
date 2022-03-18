@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import tw from "twin.macro";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -22,7 +23,7 @@ const FAQPanel = () => {
 
   return (
     <>
-      <div className="bg-[#8F5AE8] p-2 flex flex-row rounded-lg mb-2">
+      <ToggleButtonGroup>
         <ToggleButton
           category={category}
           handleToggle={handleToggle}
@@ -37,25 +38,24 @@ const FAQPanel = () => {
         >
           Viewers
         </ToggleButton>
-      </div>
-      <div className="flex flex-col p-4 rounded-lg mb-12 mx-8 lg:mx-0 w-11/12 lg:w-3/5 xl:w-2/5  self-center">
-        <div className="border-2 border-[#e0e0e0] rounded-lg bg-[##FFFCF5]">
-          {FAQS[category].map((faq) => (
-            <FAQEntry
-              id={FAQS[category].indexOf(faq) + 1}
-              question={faq[0]}
-              answer={faq[1]}
-              expanded={expanded}
-              handleExpand={handleExpand}
-            />
-          ))}
-        </div>
-      </div>
+      </ToggleButtonGroup>
+
+      <Panel>
+        {FAQS[category].map((faq) => (
+          <FAQ
+            id={FAQS[category].indexOf(faq) + 1}
+            question={faq[0]}
+            answer={faq[1]}
+            expanded={expanded}
+            handleExpand={handleExpand}
+          />
+        ))}
+      </Panel>
     </>
   );
 };
 
-const FAQEntry = ({ id, handleExpand, question, answer, expanded }) => {
+const FAQ = ({ id, handleExpand, question, answer, expanded }) => {
   return (
     <Accordion
       expanded={expanded === `panel${id}`}
@@ -86,7 +86,7 @@ const FAQEntry = ({ id, handleExpand, question, answer, expanded }) => {
 const ToggleButton = ({ children, handleToggle, category, img }) => {
   return (
     <button
-      className={`py-3 px-12 font-bold rounded flex flex-row items-center ${
+      className={`py-2 px-6 text-sm md:py-3 md:px-9 md:text-lg font-bold rounded flex flex-row items-center ${
         category === children.toLowerCase()
           ? " bg-white text-[#8F5AE8]"
           : "text-white"
@@ -98,5 +98,8 @@ const ToggleButton = ({ children, handleToggle, category, img }) => {
     </button>
   );
 };
+
+const ToggleButtonGroup = tw.div`bg-[#8F5AE8] p-2 flex flex-row rounded-lg`;
+const Panel = tw.div`mt-4 mb-12 border-2 border-[#e0e0e0] rounded-lg bg-[#FFFCF5] w-11/12 md:w-4/5 lg:w-3/5 xl:w-2/5`;
 
 export default FAQPanel;

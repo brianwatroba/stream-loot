@@ -2,6 +2,10 @@
 
 Decentralized rewards program for Twitch streamers and their communities. Automatically bridges on-Twitch donations and channel subscriptions to tradeable crypto equivalents (tokens and NFTs) on Polygon.
 
+https://www.streamloot.xyz
+
+_Beta launching Spring 2022_
+
 ## Background
 
 #### WHY BUILD THIS?
