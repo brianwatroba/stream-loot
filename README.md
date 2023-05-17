@@ -6,7 +6,7 @@ Decentralized rewards program for Twitch streamers and their communities. Automa
 
 Front end DAPP: https://www.streamloot.xyz
 
-_Beta launching Spring 2022_
+_Beta launching Summer 2022_
 
 ## Background
 
@@ -27,7 +27,7 @@ Bolster the existing Twitch streamer support system (donations/subscriptions) by
 
 Automatically convert donation/subscription events on a Streamer's channel to token and NFT equivalents, which the streamers can customize. Make them tradeable. Give streamers opportunities to use these rewards off of Twitch: in ecommerce, promotions, and events off of Twitch.
 
-## Project North Stars
+## Project goals
 
 - Streamers earn more with less effort
 - Viewers feel more connected and satisfied with their support
