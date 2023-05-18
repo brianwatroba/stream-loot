@@ -24,7 +24,7 @@ const Landing = () => {
             rewards for fans
           </Subtitle>
           <Button href="/">LAUNCH APP</Button>
-          <Disclaimer className="mt-4">Beta access: Summer 2022</Disclaimer>
+          <Disclaimer className="mt-4">Beta access: Summer 2023</Disclaimer>
         </Section>
       </GradientBackground>
       <Section>
