@@ -17,6 +17,8 @@ Automatically bridges on-Twitch donations and channel subscriptions to tradeable
 
 ---
 
+<img src="https://res.cloudinary.com/dfuyisjqi/image/upload/v1684438324/github%20images/streamlootbanner_d8xamy.png" />
+
 ## Access
 
 Front end DAPP: https://www.streamloot.xyz
