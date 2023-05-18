@@ -18,11 +18,6 @@ contract StreamLoot is ERC1155 {
         NFT3
     }
 
-    // uint256 public constant TOKEN = 0;
-    // uint256 public constant NFT1 = 1;
-    // uint256 public constant NFT2 = 2;
-    // uint256 public constant NFT3 = 3;
-
     constructor()
         // TODO: set correct URIs
         ERC1155("https://streamloot.xyz/api/streamer/item/{id}.json")
