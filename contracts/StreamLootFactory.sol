@@ -1,13 +1,18 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
+// TODO: upgrade solidity version
+// TODO: fix URI schema, add endpoints
+// TODO: is create2 in new version?
+// TODO: can remove the streamerIdToStreamLoot?
+
 import "./StreamLoot.sol";
 import "../interfaces/IStreamLoot.sol";
-import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 contract StreamLootFactory {
     address public owner;
     address[] public allStreamLoots;
+    // TODO: can I remove this? Way to check on chain if something exists at that address
     mapping(uint256 => address) public streamerIdToStreamLoot;
     mapping(address => uint256) public streamLootToStreamerId;
 

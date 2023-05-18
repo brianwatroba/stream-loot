@@ -201,7 +201,7 @@ describe("StreamLoot.sol", () => {
     });
   });
 
-  describe.skip("burn()", () => {
+  describe("burn()", () => {
     beforeEach(async () => await deploy());
     it("Burns a token amount successfully", async () => {
       await mintToken(owner, streamer1.address, 1, 1);
@@ -209,14 +209,14 @@ describe("StreamLoot.sol", () => {
       await burnToken(streamer1, streamer1.address, 1, 1);
       expect(await StreamLoot.balanceOf(streamer1.address, 0)).to.equal(0);
     });
-    it("Fails if: not tokenholder", async () => {
+    it.skip("Fails if: not tokenholder", async () => {
       await expect(
         burnToken(streamer1, streamer2.address, 1, 1)
       ).to.be.revertedWith("StreamLoot: NOT_TOKENHOLDER");
     });
   });
 
-  describe.skip("burnBatch()", () => {
+  describe("burnBatch()", () => {
     beforeEach(async () => await deploy());
     it("Burns multiple token amounts at once successfully", async () => {
       await mintTokens(owner, streamer1.address, [0, 1, 2], [200, 1, 1]);
@@ -242,7 +242,7 @@ describe("StreamLoot.sol", () => {
         ethers.BigNumber.from(0),
       ]);
     });
-    it("Fails if: not tokenholder", async () => {
+    it.skip("Fails if: not tokenholder", async () => {
       await expect(
         burnToken(streamer1, streamer2.address, 1, 1)
       ).to.be.revertedWith("StreamLoot: NOT_TOKENHOLDER");
