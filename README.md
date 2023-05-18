@@ -17,7 +17,7 @@ Automatically bridges on-Twitch donations and channel subscriptions to tradeable
 
 ---
 
-<img src="https://res.cloudinary.com/dfuyisjqi/image/upload/v1684438324/github%20images/streamlootbanner_d8xamy.png" />
+<img src="https://res.cloudinary.com/dfuyisjqi/image/upload/v1684438496/github%20images/streamlootbannerbase_qtqsxv.png" />
 
 ## Access
 
