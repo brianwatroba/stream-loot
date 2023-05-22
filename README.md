@@ -59,7 +59,7 @@ Automatically convert donation/subscription events on a Streamer's channel to to
 
 ## Structure
 
-![Project structure](https://streamloot.s3.us-east-2.amazonaws.com/streamlootstructure.png)
+![Project structure](https://res.cloudinary.com/dfuyisjqi/image/upload/v1684765136/streamlootstructure2_ljvkpu.png)
 
 ## Contract addresses
 
