@@ -54,7 +54,7 @@ Automatically convert donation/subscription events on a Streamer's channel to to
 
 1. **Streamers customize and mint their Loot Set (on-chain):** Streamer is authenticated via Twitch Oauth and then can customize their set. Donation events are mapped to a token that streamers can customize name and logo for. Channel subscriptions are mapped to NFTs that streamers can customize name, image, and tenure (awarding after x months subbed). Standard Loot Sets include 1 token and 3 NFTs. Uses ERC1155 token standard to encompass all loot into a single contract. Streamers can decide to mint a portion of tokens for themselves at initial contract creation.
 2. **Server listens for and saves on-Twitch donation and sub events (centralized):** after minting their Loot Set, Streamers provide necessary Twitch API eventsub permissions so our server can begin listening for events and logging them. All donation and channel subscription events are saved to a centralized database and not minted on chain yet.
-3. **Viewers mint their rewards when they'd like:** viewers can log into Stream Loot (via Twitch Oauth) to view their current Stream Loot--both minted and un-minted. If a viewer chooses, they can mint any available Stream Loot by making a server request (which signs the transaction with a private key), and in turn call mint()/mintBatch() on the Stream Loot Polygon smart contract. The contract verifies the signature, and mints the Stream Loot if all conditions are met.
+3. **Viewers mint their rewards when they'd like:** viewers can log into Stream Loot (via Twitch Oauth) to view their current Stream Loot--both minted and un-minted. If a viewer chooses, they can mint any available Stream Loot by making a server request (which signs the transaction with a private key), and in turn call mint()/mintBatch() on the Stream Loot Base smart contract. The contract verifies the signature, and mints the Stream Loot if all conditions are met.
 4. **Viewers are free to trade and spend rewards:** viewers can interact with and swap their loot directly with the on-chain contracts. Stream Loot also provides a front end for easy contract interaction.
 
 ## Structure
@@ -63,12 +63,7 @@ Automatically convert donation/subscription events on a Streamer's channel to to
 
 ## Contract addresses
 
-#### Polygon (Main Net)
-
-- _StreamLootFactory.sol:_ TBD
-- _StreamLoot.sol:_ TBD
-
-#### Test (Polygon - Mumbai)
+#### Test (Base - Goerli)
 
 - _StreamLootFactory.sol:_ TBD
 - _StreamLoot.sol:_ TBD
@@ -82,23 +77,23 @@ Automatically convert donation/subscription events on a Streamer's channel to to
 ```bash
 /.env
 
-ALCHEMY_API_KEY=XXX
-POLYGON_PRIVATE_KEY=xxx
+BASE_GOERLI_URL=https://goerli.base.org
+PRIVATE_KEY=xxx
 ```
 
 ## Usage
 
 1. Front end (on localhost): finish this later
 2. Local testing: tests written in Chai/Mocha using Hardhat/Ethers.js. Run `npx hardhat test` for test suite.
-3. Deployment to Polygon Test (Mumbai): ensure your .env file includes your Rinkeby private key. Then run `npx hardhat run scripts/deploy.js --network polygon-mumbai`. Deploy script only deploys the ProjectFactory.sol contract.
+3. Deployment to Base (Goerli Testnet): ensure your .env file includes your private key. Then run `npx hardhat run scripts/deploy.js --network base-goerli`. Deploy script only deploys the ProjectFactory.sol contract.
 4. Deployment to other test nets: add your desired network to the `networks` object in `hardhat-config.js` using the following format:
 
 ```javascript
 /hardhat.config.js
 
-polygon: {
-      url: `https://polygon-mumbai.g.alchemy.com/v2${process.env.ALCHEMY_API_KEY}`,
-      accounts: [`${process.env.POLYGON_TEST_PRIVATE_KEY}`],
+"base-goerli": {
+      url: process.env.BASE_GOERLI_URL || "",
+      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
 ```
 
